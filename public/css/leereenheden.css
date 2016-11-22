@@ -1,0 +1,6 @@
+/* CSS voor elementen die alleen op de opdrachten pagina zitten */
+
+/* Panel body div met leereenheden */
+.leereenhedendiv {
+  display: none;
+}
