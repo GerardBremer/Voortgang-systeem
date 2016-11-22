@@ -1,11 +1,15 @@
 /* CSS voor elementen die alleen op de opdrachten pagina zitten */
 
-/* Panel body div met leereenheden */
-.leereenhedendiv {
+ .leereenhedendiv {
 	display: none;
 }
+
 /* Panel body div met opdrachten */
-.opdrachtendiv {
+.lopendeopdrachtendiv {
+	display: none;
+}
+
+.afgerondeopdrachtendiv {
 	display: none;
 }
 
@@ -22,13 +26,62 @@
 }
 
 
+/* Feedback optie in uitnodigen modal */
 #uitnodigen_feedback{
 	display: block;
 }
+
+/* Beoordeling optie in uitnodigen modal */
 #uitnodigen_beoordeling{
 	display: none;
 }
+
+/* Groepsopdracht optie in uitnodigen modal */
 #uitnodigen_groepsopdracht{
 	display: block;
 }
 
+/* Lopende opdrachten panel header met chevron down icon */
+#lopendeopdrachten .fa-chevron-up {
+	transition: 0.9s;
+	transform: rotateX(0deg);
+}
+
+/* Lopende opdrachten header grijs maken on hover */
+#lopendeopdrachten:hover {
+	background-color: #f5f5f5;
+}
+
+/* Afgeronde opdrachten header grijs maken on hover */
+#afgerondeopdrachten:hover {
+	background-color: #f5f5f5;
+}
+
+.chevronuprotate{
+	-moz-transition: all 0.5s linear;
+	-webkit-transition: all 0.5s linear;
+	transition: all 0.5s linear;
+}
+
+.chevrondownrotate{
+	-moz-transition: all 0.5s linear;
+	-webkit-transition: all 0.5s linear;
+	transition: all 0.5s linear;
+}
+
+.chevronuprotate.down{
+	-moz-transform:rotate(180deg);
+	-webkit-transform:rotate(180deg);
+	transform:rotate(180deg);
+}
+
+.chevrondownrotate.up{
+	-moz-transform:rotate(180deg);
+	-webkit-transform:rotate(180deg);
+	transform:rotate(180deg);
+}
+
+/* De class die de opdrachten die uit de database worden gehaald hebben */
+.opdracht {
+    text-align: left;
+}

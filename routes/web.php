@@ -23,4 +23,9 @@ Route::get('/opdrachten', 'OpdrachtenController@index');
 Route::post('/opdrachten/toevoegen','OpdrachtenController@insert');
 Route::get('admin', 'AdminController@index');
 Route::post('admin', 'AdminController@store');
+Route::get('/feedback', 'FeedbackController@index');
+Route::post('/feedback/accepteren','FeedbackController@insert');
+Route::post('/feedback/uitnodigen', 'FeedbackController@uitnodigen');
+
+Route::get('/feedback/delete/{id}', 'FeedbackController@destroy');// Destroy feedback invite
 

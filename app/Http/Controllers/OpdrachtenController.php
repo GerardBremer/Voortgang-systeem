@@ -41,14 +41,14 @@ class OpdrachtenController extends Controller
       $leereenheden  = $request->input('opdracht_leereenheden');
       $deadline = $request->input('opdracht_deadline');
       $individueelgroep = $request->input('individueelgroepselect');
+      $opdrachtlink = $request->input('opdracht_link');
 
 // Array met de data voor de nieuwe opdracht en de kolommen 
 // waar de data moet worden ingezet.
       
 // Voor de pijl staat de kolom waar iets moet worden ingezet,
 // Na de pijl staat de variabele die de tekst van de velden bevat.
-$data = array("titel"=>"$titel","type"=>"$type", "beschrijving" => "$beschrijving", "leereenheden" => "$leereenheden", "deadline" => "$deadline", "individueelofgroepsopdracht" => "$individueelgroep");
-
+$data = array("titel"=>"$titel","type"=>"$type", "beschrijving" => "$beschrijving", "leereenheden" => "$leereenheden", "deadline" => "$deadline", "individueelofgroepsopdracht" => "$individueelgroep", "link" => "$opdrachtlink");
 // Tabel waar de data in moet worden gezet.
 DB::table('opdrachten')->insert(array($data));
 

@@ -1,21 +1,106 @@
 // BEGIN TOON EN VERBERG KOLOMMEN 
 
-// Toon leereenheden met animatie wanneer de pagina geladen wordt
+// Toon lopende opdrachten met animatie wanneer de pagina geladen wordt
 window.onload = function() {
-   $('.leereenhedendiv').slideToggle('slow');
+   $('.lopendeopdrachtendiv').slideToggle('slow');
+    $('.opdrachtdetails').slideToggle('slow');
+    $('.leereenhedendiv').slideToggle('slow');
 };
 
-// Toon of verberg opdrachten met animatie na het klikken op een leereenheid
-$('.leereenheid').click(function() {
-    $('.opdrachtendiv').slideToggle('slow');
+// Toon of verberg lopende opdrachten met animatie na het klikken op lopende opdrachten header
+$('#lopendeopdrachten').click(function() {
+    $('.lopendeopdrachtendiv').slideToggle('slow');
 });
+
+// Toon of verberg afgeronde opdrachten met animatie na het klikken op afgeronde opdrachten header
+$('#afgerondeopdrachten').click(function() {
+    $('.afgerondeopdrachtendiv').slideToggle('slow');
+});
+
+// Toon of verberg leereenheden met animatie na het klikken op een opdracht
+//$('.opdracht').click(function() {
+//    $('.leereenhedendiv').slideToggle('slow');
+//});
 
 // Toon of verberg opdrachten details met animatie na het klikken op een opdracht
-$('.opdracht').click(function() {
-    $('.opdrachtdetails').slideToggle('slow');
+//$('.opdracht').click(function() {
+ //   $('.opdrachtdetails').slideToggle('slow');
+//});
+
+$("#lopendeopdrachten").click(function(){
+    $(".chevronuprotate").toggleClass("down")  ;
+})
+
+$("#afgerondeopdrachten").click(function(){
+    $(".chevrondownrotate").toggleClass("up")  ;
+})
+
+
+jQuery('.clickable').click(function(){
+    jQuery('.clickable').removeClass('active');
+    jQuery(this).addClass('active');
 });
 
-// EINDE TONEN EN VERBERGEN KOLOMMEN 
+$('.opdracht').click(function(){
+    selectOpdracht(this.value)
+    selectOpdrachtDetails(this.value)
+});
+
+// EINDE TONEN EN VERBERGEN KOLOMMEN
+
+// BEGIN GEKOPPELDE LEEREENHEDEN EN OPDRACHT DETAILS
+
+// Functie die met behulp van ajax de gekoppelde leereenheden van de aangeklkte opdracht ophaald
+function selectOpdracht(str) {
+    if (str == "") {
+        // De div waar de data in moet worden getoond
+        document.getElementById("gekoppeldeleereenheden").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Wanneer alles klaar is de data in de div tonen
+                document.getElementById("gekoppeldeleereenheden").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","getopdrachtleereenheden.php?q="+str,true);
+        xmlhttp.send();
+    }
+}
+
+// Functie die door middel van ajax de opdracht details van de aangeklikte opdracht ophaald
+function selectOpdrachtDetails(str) {
+    if (str == "") {
+        // De div waar de data in moet worden getoond
+        document.getElementById("opdrachtdetails").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Wanneer alles klaar is de data in de div tonen
+                document.getElementById("opdrachtdetails").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","getopdrachtdetails.php?q="+str,true);
+        xmlhttp.send();
+    }
+}
+
+// EINDE GEKOPPELDE LEEREENHEDEN EN OPDRACHT DETAILS
 
 // BEGIN POPUP OPDRACHT TOEVOEGEN
 
@@ -26,7 +111,7 @@ var modal = document.getElementById("opdrachttoevoegenmodal");
 var btn = document.getElementById("myBtn");
 
 // Haal de knop voor annuleren op
-var annuleeer = document.getElementById("annuleren");
+var annuleer = document.getElementById("annuleer");
 
 // Haal het <span> element voor het sluiten van de popup op
 var span = document.getElementsByClassName("close")[0];
@@ -57,15 +142,19 @@ window.onclick = function(event) {
 function typeSelectCheck(nameSelect)
 {
     // Als het type "individueel" is gekozen de radio buttons verborgen houden
+    // en de opdracht link op 48% width houden.
     if(nameSelect){
         admOptionValue = document.getElementById("individueeltype").value;
         if(admOptionValue == nameSelect.value){
             document.getElementById("indiviudeelofgroepsopdrachtdiv").style.display = "none";
+            document.getElementById("opdrachtuploadendiv").style.width = "48%";
         }
         // Als een andere optie is gekozen (intern of extern), de radio buttons tonen voor het 
-        // selecteren of de opdracht individueel of in een groep word gedaan
+        // selecteren of de opdracht individueel of in een groep word gedaan,
+        // de opdracht link width verhogen naar 100%.
         else{
           document.getElementById("indiviudeelofgroepsopdrachtdiv").style.display = "block";
+          document.getElementById("opdrachtuploadendiv").style.width = "100%";
         }
     }
 }

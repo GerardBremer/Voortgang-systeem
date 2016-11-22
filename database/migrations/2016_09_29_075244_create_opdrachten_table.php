@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOpdrachtsTable extends Migration
+class CreateOpdrachtenTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,12 +19,10 @@ class CreateOpdrachtsTable extends Migration
             $table->string('titel');
             $table->string('type');
             $table->text('beschrijving');
+            $table->string('leereenheid_id');
             $table->string('status');
             $table->string('deadline');
             $table->string('individueelofgroepsopdracht');
-
-
-
         });
     }
 
